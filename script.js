@@ -46,7 +46,46 @@ function displayMovies(movies) {
                 <p>${movie.Year}</p>
             </div>
         `;
+        card.addEventListener('click', function() {
+    openModal(movie.imdbID);
+});
 
         results.appendChild(card);
     });
 }
+const modal = document.getElementById('modal');
+const closeModal = document.getElementById('closeModal');
+
+function openModal(imdbID) {
+    fetch(`${BASE_URL}?apikey=${API_KEY}&i=${imdbID}&plot=full`)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(movie) {
+            const poster = movie.Poster !== 'N/A'
+                ? movie.Poster
+                : 'https://via.placeholder.com/180x270?text=No+Poster';
+
+            document.getElementById('modalPoster').src = poster;
+            document.getElementById('modalTitle').textContent = movie.Title;
+            document.getElementById('modalGenre').textContent = movie.Genre;
+            document.getElementById('modalYear').textContent = '📅 ' + movie.Year;
+            document.getElementById('modalRuntime').textContent = '⏱ ' + movie.Runtime;
+            document.getElementById('modalRating').textContent = '⭐ ' + movie.imdbRating + '/10';
+            document.getElementById('modalPlot').textContent = movie.Plot;
+            document.getElementById('modalDirector').textContent = '🎬 Director: ' + movie.Director;
+            document.getElementById('modalActors').textContent = '🎭 Cast: ' + movie.Actors;
+
+            modal.classList.add('active');
+        });
+}
+
+closeModal.addEventListener('click', function() {
+    modal.classList.remove('active');
+});
+
+modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+        modal.classList.remove('active');
+    }
+});
