@@ -4,27 +4,38 @@ const BASE_URL = 'https://www.omdbapi.com/';
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const results = document.getElementById('results');
+const loader = document.getElementById('loader');
+searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') searchBtn.click();
+});
 
 searchBtn.addEventListener('click', function() {
     const query = searchInput.value.trim();
 
     if (query === '') {
+        results.innerHTML = '';
+        loader.classList.remove('hidden');
         results.innerHTML = '<p style="color: #1dd7b8;">Please enter a movie name.</p>';
         return;
     }
 
     results.innerHTML = '<p style="color: #1dd7b8;">Searching...</p>';
+    loader.classList.remove('hidden');
 
     fetch(`${BASE_URL}?apikey=${API_KEY}&s=${query}`)
         .then(function(response) {
             return response.json();
         })
         .then(function(data) {
+            loader.classList.add('hidden');
             if (data.Response === 'False') {
+                loader.classList.add('hidden');
                 results.innerHTML = '<p style="color: #1dd7b8;">No movies found. Try a different search.</p>';
                 return;
             }
+            loader.classList.add('hidden');
             displayMovies(data.Search);
+            
         });
 });
 
