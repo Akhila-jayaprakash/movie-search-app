@@ -14,16 +14,21 @@
     </svg>
     Movie Search
 </h1>
+<div class="tabs">
+    <button class="tab active" id="searchTab">🔍 Search</button>
+    <button class="tab" id="favTab">❤️ Favourites</button>
+</div>
     
     <div class="search-container">
         <input type="text" id="searchInput" placeholder="Search for a movie...">
         <button id="searchBtn">Search</button>
     </div>
 
-    <div id="loader" class="loader">
+    <div id="loader" class="loader hidden">
     <div class="spinner"></div>
 </div>
 <div id="results"></div>
+<div id="favourites"></div>
     <footer>
         Built by <a href="https://github.com/Akhila-jayaprakash" target="_blank">Akhila Jayaprakash</a>
     </footer>

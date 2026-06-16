@@ -327,3 +327,60 @@ footer a:hover {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tab {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.tab.active {
+    background: #1dd7b8;
+    color: #07485e;
+    font-weight: bold;
+}
+
+.tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+.movie-card {
+    position: relative;
+}
+
+.heart-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    z-index: 10;
+}
+
+.heart-btn:hover {
+    transform: scale(1.2);
+}
+
+.heart-btn.liked {
+    background: rgba(255, 50, 50, 0.7);
+}
